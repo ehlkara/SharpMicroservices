@@ -1,11 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36511.14 d17.14
+VisualStudioVersion = 17.14.36511.14
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{87C1B51C-2B46-408E-B663-A6FEB34EE7C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog", "catalog", "{34CCA0C7-6436-4821-93FD-18F6F2CD8BC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMicroservices.Catalog.API", "src\services\catalog\SharpMicroservices.Catalog.API\SharpMicroservices.Catalog.API.csproj", "{B1714B6D-4F22-4978-97E9-9BCBD3794DC4}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1714B6D-4F22-4978-97E9-9BCBD3794DC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1714B6D-4F22-4978-97E9-9BCBD3794DC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1714B6D-4F22-4978-97E9-9BCBD3794DC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1714B6D-4F22-4978-97E9-9BCBD3794DC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87C1B51C-2B46-408E-B663-A6FEB34EE7C4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{34CCA0C7-6436-4821-93FD-18F6F2CD8BC9} = {87C1B51C-2B46-408E-B663-A6FEB34EE7C4}
+		{B1714B6D-4F22-4978-97E9-9BCBD3794DC4} = {34CCA0C7-6436-4821-93FD-18F6F2CD8BC9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {117084E9-879C-4176-9237-416999E226F4}
