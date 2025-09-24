@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
-namespace SharpMicroservice.Shared;
+namespace SharpMicroservices.Shared;
 
 public interface IRequestByServiceResult<T> : IRequest<ServiceResult<T>>;
 
