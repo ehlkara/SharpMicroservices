@@ -1,8 +1,7 @@
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
+using SharpMicroservices.Catalog.API;
 using SharpMicroservices.Catalog.API.Features.Categories;
-using SharpMicroservices.Catalog.API.Features.Categories.Create;
 using SharpMicroservices.Catalog.API.Options;
+using SharpMicroservices.Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddOptionsExt();
 builder.Services.AddDatabaseServiceExt();
+builder.Services.AddCommonServiceExt(typeof(CatalogAssembly));
 
 var app = builder.Build();
 
