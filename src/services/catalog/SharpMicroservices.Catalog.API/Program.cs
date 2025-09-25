@@ -1,6 +1,7 @@
-using MongoDB.Driver;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using SharpMicroservices.Catalog.API.Features.Categories.Create;
 using SharpMicroservices.Catalog.API.Options;
-using SharpMicroservices.Catalog.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,15 @@ builder.Services.AddOptionsExt();
 builder.Services.AddDatabaseServiceExt();
 
 var app = builder.Build();
+
+app.MapPost("/categories", async (CreateCategoryCommand command, IMediator mediator) => {
+    var result = await mediator.Send(command);
+
+    return new ObjectResult(result)
+    {
+        StatusCode = result.Status.GetHashCode()
+    };
+});
 
 if (app.Environment.IsDevelopment())
 {

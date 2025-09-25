@@ -27,6 +27,6 @@ public class CreateCategoryCommandHandler(AppDbContext context) : IRequestHandle
         await context.Categories.AddAsync(category, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
 
-        return ServiceResult<CreateCategoryResponse>.SuccessAsNoContent(new CreateCategoryResponse(category.Id), "<empty>");
+        return ServiceResult<CreateCategoryResponse>.SuccessAsCreated(new CreateCategoryResponse(category.Id), "<empty>");
     }
 }
