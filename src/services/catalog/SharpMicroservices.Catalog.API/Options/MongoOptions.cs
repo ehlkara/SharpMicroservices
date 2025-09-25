@@ -2,7 +2,7 @@
 
 namespace SharpMicroservices.Catalog.API.Options;
 
-public class MongoOption
+public class MongoOptions
 {
     [Required]
     public string DatabaseName { get; set; } = default!;
