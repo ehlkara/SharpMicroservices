@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-
+using FluentValidation.AspNetCore;
+using FluentValidation;
 namespace SharpMicroservices.Shared.Extensions;
 
 public static class CommonSerivceExt
@@ -8,6 +9,9 @@ public static class CommonSerivceExt
     {
         services.AddHttpContextAccessor();
         services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining(assembly));
+
+        services.AddFluentValidationAutoValidation();
+        services.AddValidatorsFromAssemblyContaining(assembly);
 
         return services;
     }
