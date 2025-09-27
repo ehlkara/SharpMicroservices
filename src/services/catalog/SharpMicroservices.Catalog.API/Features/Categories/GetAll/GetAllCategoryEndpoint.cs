@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SharpMicroservices.Catalog.API.Features.Categories.Dtos;
 using SharpMicroservices.Catalog.API.Repositories;
@@ -9,12 +10,13 @@ namespace SharpMicroservices.Catalog.API.Features.Categories.GetAll;
 
 public class GetAllCategoryQuery : IRequest<ServiceResult<List<CategoryDto>>>;
 
-public class GetAllCategoryQueryhandler(AppDbContext context) : IRequestHandler<GetAllCategoryQuery, ServiceResult<List<CategoryDto>>>
+public class GetAllCategoryQueryhandler(AppDbContext context, IMapper mapper) : IRequestHandler<GetAllCategoryQuery, ServiceResult<List<CategoryDto>>>
 {
     public async Task<ServiceResult<List<CategoryDto>>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
     {
-        var categories = await context.Categories.Select(c => new CategoryDto(c.Id, c.Name)).ToListAsync(cancellationToken);
-        return ServiceResult<List<CategoryDto>>.SuccessAsOk(categories);
+        var categories = await context.Categories.ToListAsync(cancellationToken);
+        var categoriesDto = mapper.Map<List<CategoryDto>>(categories);
+        return ServiceResult<List<CategoryDto>>.SuccessAsOk(categoriesDto);
     }
 }
 
