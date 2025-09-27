@@ -45,6 +45,12 @@ Content-Type: application/json
 }
 ###
 
+
+DELETE {{baseAddress}}/api/courses/{{courseId}}
+Accept: application/json
+###
+
+
 GET {{baseAddress}}/api/courses
 Accept: application/json
 ###

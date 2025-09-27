@@ -1,4 +1,5 @@
 ﻿using SharpMicroservices.Catalog.API.Features.Courses.Create;
+using SharpMicroservices.Catalog.API.Features.Courses.Delete;
 using SharpMicroservices.Catalog.API.Features.Courses.GetAll;
 using SharpMicroservices.Catalog.API.Features.Courses.GetById;
 using SharpMicroservices.Catalog.API.Features.Courses.Update;
@@ -13,6 +14,7 @@ public static class CourseEndpointExt
             .CreateCourseGroupItemEndpoint()
             .GetAllCourseGroupItemEndpoint()
             .GetCourseByIdGroupItemEndpoint()
-            .UpdateCourseGroupItemEndpoint();
+            .UpdateCourseGroupItemEndpoint()
+            .DeleteCourseGroupItemEndpoint();
     }
 }
