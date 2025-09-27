@@ -31,6 +31,20 @@ Content-Type: application/json
 }
 ###
 
+PUT {{baseAddress}}/api/courses
+Accept: application/json
+Content-Type: application/json
+
+{
+  "Id": "{{courseId}}",
+  "name": "New Course 22",
+  "description": "This is a new course",
+  "price": 99.99,
+  "ImageUrl": "https://example.com/course-image2.jpg",
+  "categoryId": "{{categoryId}}"
+}
+###
+
 GET {{baseAddress}}/api/courses
 Accept: application/json
 ###
@@ -38,3 +52,4 @@ Accept: application/json
 GET {{baseAddress}}/api/courses/{{courseId}}
 Accept: application/json
 ###
+
