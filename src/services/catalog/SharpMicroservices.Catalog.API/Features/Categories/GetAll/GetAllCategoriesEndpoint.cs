@@ -12,7 +12,7 @@ public class GetAllCategoryQueryhandler(AppDbContext context, IMapper mapper) : 
     }
 }
 
-public static class GetAllCategoryEndpoint
+public static class GetAllCategoriesEndpoint
 {
     public static RouteGroupBuilder GetAllCategoryGroupItemEndpoint(this RouteGroupBuilder group)
     {
