@@ -1,12 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using SharpMicroservices.Catalog.API.Features.Categories.Dtos;
-using SharpMicroservices.Catalog.API.Repositories;
-using SharpMicroservices.Shared;
-using SharpMicroservices.Shared.Extensions;
-
-namespace SharpMicroservices.Catalog.API.Features.Categories.GetAll;
+﻿namespace SharpMicroservices.Catalog.API.Features.Categories.GetAll;
 
 public class GetAllCategoryQuery : IRequest<ServiceResult<List<CategoryDto>>>;
 

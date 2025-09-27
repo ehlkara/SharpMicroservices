@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace SharpMicroservices.Catalog.API.Features.Categories.Create;
+﻿namespace SharpMicroservices.Catalog.API.Features.Categories.Create;
 
 public class CreateCategoryCommandValidator : AbstractValidator<CreateCategoryCommand>
 {

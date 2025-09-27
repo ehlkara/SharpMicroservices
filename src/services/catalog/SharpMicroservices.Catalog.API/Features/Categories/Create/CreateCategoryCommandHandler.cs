@@ -1,11 +1,4 @@
-﻿using MassTransit;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using SharpMicroservices.Catalog.API.Repositories;
-using SharpMicroservices.Shared;
-using System.Net;
-
-namespace SharpMicroservices.Catalog.API.Features.Categories.Create;
+﻿namespace SharpMicroservices.Catalog.API.Features.Categories.Create;
 
 public class CreateCategoryCommandHandler(AppDbContext context) : IRequestHandler<CreateCategoryCommand, ServiceResult<CreateCategoryResponse>>
 {

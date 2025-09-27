@@ -1,12 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
-using SharpMicroservices.Catalog.API.Features.Categories.Dtos;
-using SharpMicroservices.Catalog.API.Repositories;
-using SharpMicroservices.Shared;
-using SharpMicroservices.Shared.Extensions;
-using System.Net;
-
-namespace SharpMicroservices.Catalog.API.Features.Categories.GetById;
+﻿namespace SharpMicroservices.Catalog.API.Features.Categories.GetById;
 
 public record GetCategoryByIdQuery(Guid Id) : IRequestByServiceResult<CategoryDto>;
 

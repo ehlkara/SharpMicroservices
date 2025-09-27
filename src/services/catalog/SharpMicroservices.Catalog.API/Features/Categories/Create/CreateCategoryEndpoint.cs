@@ -1,6 +1,4 @@
-﻿using MediatR;
-using SharpMicroservices.Shared.Extensions;
-using SharpMicroservices.Shared.Filters;
+﻿using SharpMicroservices.Shared.Filters;
 
 namespace SharpMicroservices.Catalog.API.Features.Categories.Create;
 

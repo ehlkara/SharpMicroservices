@@ -1,5 +1,4 @@
 ﻿using SharpMicroservices.Catalog.API.Features.Courses;
-using SharpMicroservices.Catalog.API.Repositories;
 
 namespace SharpMicroservices.Catalog.API.Features.Categories;
 
