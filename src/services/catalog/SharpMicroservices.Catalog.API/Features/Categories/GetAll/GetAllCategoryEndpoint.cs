@@ -10,7 +10,7 @@ namespace SharpMicroservices.Catalog.API.Features.Categories.GetAll;
 
 public class GetAllCategoryQuery : IRequest<ServiceResult<List<CategoryDto>>>;
 
-public class GetAllCategoryQueryhandler(AppDbContext context, IMapper mapper) : IRequestHandler<GetAllCategoryQuery, ServiceResult<List<CategoryDto>>>
+public class GetAllCategoryQueryhandler(AppDbContext context, IMapper mapper) : IRequestByServiceResult<List<CategoryDto>>
 {
     public async Task<ServiceResult<List<CategoryDto>>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
     {
