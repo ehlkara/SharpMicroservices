@@ -1,7 +1,7 @@
 using SharpMicroservices.Catalog.API;
 using SharpMicroservices.Catalog.API.Features.Categories;
+using SharpMicroservices.Catalog.API.Features.Courses;
 using SharpMicroservices.Catalog.API.Options;
-using SharpMicroservices.Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +16,7 @@ builder.Services.AddCommonServiceExt(typeof(CatalogAssembly));
 var app = builder.Build();
 
 app.AddCategoryGroupEndpointExt();
+app.AddCourseGroupEndpointExt();
 
 if (app.Environment.IsDevelopment())
 {
