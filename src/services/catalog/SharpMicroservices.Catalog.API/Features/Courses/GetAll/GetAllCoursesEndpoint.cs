@@ -30,6 +30,7 @@ public static class GetAllCoursesEndpoint
     {
         group.MapGet("/", async (IMediator mediator) => (await mediator.Send(new GetAllCoursesQuery())).ToGenericResult())
             .WithName("GetAllCourse")
+            .MapToApiVersion(1, 0)
             .AddEndpointFilter<ValidationFilter<CreateCourseCommand>>();
 
         return group;

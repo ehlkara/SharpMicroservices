@@ -27,7 +27,7 @@ public static class GetAllByUserIdEndpoint
     public static RouteGroupBuilder GetAllByUserIdGroupItemEndpoint(this RouteGroupBuilder group)
     {
         group.MapGet("/user/{userId:guid}", async (IMediator mediator, Guid userId) => (await mediator.Send(new GetAllByUserIdQuery(userId))).ToGenericResult())
-            .WithName("GetAllByUserId");
+            .WithName("GetAllByUserId").MapToApiVersion(1, 0);
 
         return group;
     }
