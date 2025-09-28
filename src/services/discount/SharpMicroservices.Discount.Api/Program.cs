@@ -1,4 +1,5 @@
 using SharpMicroservices.Discount.Api;
+using SharpMicroservices.Discount.Api.Features.Discounts;
 using SharpMicroservices.Discount.Api.Options;
 using SharpMicroservices.Discount.Api.Repositories;
 
@@ -15,6 +16,8 @@ builder.Services.AddCommonServiceExt(typeof(DiscountAssembly));
 builder.Services.AddVersioningExt();
 
 var app = builder.Build();
+
+app.AddDisctountGroupEndpointExt(app.AddVersionSetExt());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -5,7 +5,7 @@ namespace SharpMicroservices.Discount.Api.Repositories;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
-    public DbSet<Features.Discounts.Discount> Courses => Set<Features.Discounts.Discount>();
+    public DbSet<Features.Discounts.Discount> Discounts => Set<Features.Discounts.Discount>();
 
     public static AppDbContext Create(IMongoDatabase database)
     {
