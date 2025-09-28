@@ -1,14 +1,11 @@
 ﻿using MongoDB.Driver;
-using SharpMicroservices.Catalog.API.Features.Categories;
-using SharpMicroservices.Catalog.API.Features.Courses;
 using System.Reflection;
 
-namespace SharpMicroservices.Catalog.API.Repositories;
+namespace SharpMicroservices.Discount.Api.Repositories;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
-    public DbSet<Course> Courses => Set<Course>();
-    public DbSet<Category> Categories => Set<Category>();
+    public DbSet<Features.Discounts.Discount> Courses => Set<Features.Discounts.Discount>();
 
     public static AppDbContext Create(IMongoDatabase database)
     {
