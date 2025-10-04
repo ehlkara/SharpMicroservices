@@ -3,17 +3,18 @@ using Microsoft.Extensions.Caching.Distributed;
 using SharpMicroservices.Basket.API.Const;
 using SharpMicroservices.Basket.API.Dtos;
 using SharpMicroservices.Shared;
+using SharpMicroservices.Shared.Services;
 using System.Text.Json;
 
 namespace SharpMicroservices.Basket.API.Features.Basket.AddBasketItem;
 
-public class AddBasketItemCommandHandler(IDistributedCache distributedCache) : IRequestHandler<AddBasketItemCommand, ServiceResult>
+public class AddBasketItemCommandHandler(IDistributedCache distributedCache,IIdentityService identityService) : IRequestHandler<AddBasketItemCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(AddBasketItemCommand request, CancellationToken cancellationToken)
     {
         //Fast fail
 
-        Guid userId = Guid.Parse("8e38b13e-45a1-4150-9254-80b34bcbe707"); // Simulate getting user ID from context
+        Guid userId = identityService.GetUserId;
         var cacheKey = String.Format(BasketConst.BasketCacheKey, userId);
 
         var basketAsString = await distributedCache.GetStringAsync(cacheKey, cancellationToken);

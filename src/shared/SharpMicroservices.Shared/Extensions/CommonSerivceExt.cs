@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
 using FluentValidation;
+using SharpMicroservices.Shared.Services;
 namespace SharpMicroservices.Shared.Extensions;
 
 public static class CommonSerivceExt
@@ -12,6 +13,7 @@ public static class CommonSerivceExt
 
         services.AddFluentValidationAutoValidation();
         services.AddValidatorsFromAssemblyContaining(assembly);
+        services.AddScoped<IIdentityService, IdentityServiceFake>();
 
         services.AddAutoMapper(cfg => { }, assembly.Assembly);
 
