@@ -5,7 +5,7 @@ Accept: application/json
 Content-Type: application/json
 {
   "courseId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  "courseName": "XXX 1",
+  "courseName": "YYY 1",
   "coursePrice": 10
 }
 ###
