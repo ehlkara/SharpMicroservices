@@ -1,6 +1,11 @@
-@SharpMicroservices.Basket.API_HostAddress = http://localhost:5277
+@baseAddress = http://localhost:5277
 
-GET {{SharpMicroservices.Basket.API_HostAddress}}/weatherforecast/
+POST {{baseAddress}}/api/v1/baskets/item
 Accept: application/json
-
+Content-Type: application/json
+{
+  "courseId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "courseName": "XXX 1",
+  "coursePrice": 10
+}
 ###

@@ -13,7 +13,7 @@ public class AddBasketItemCommandHandler(IDistributedCache distributedCache) : I
     {
         //Fast fail
 
-        Guid userId = Guid.NewGuid(); // Simulate getting user ID from context
+        Guid userId = Guid.Parse("8e38b13e-45a1-4150-9254-80b34bcbe707"); // Simulate getting user ID from context
         var cacheKey = String.Format(BasketConst.BasketCacheKey, userId);
 
         var basketAsString = await distributedCache.GetStringAsync(cacheKey, cancellationToken);
@@ -35,6 +35,7 @@ public class AddBasketItemCommandHandler(IDistributedCache distributedCache) : I
 
         if (existingBasketItem is not null)
         {
+            // TODO: business rule
             currentBasket?.BasketItems.Remove(existingBasketItem);
         }
 
