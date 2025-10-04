@@ -6,6 +6,6 @@ public class DeleteBasketCommandValidator : AbstractValidator<DeleteBasketItemCo
 {
     public DeleteBasketCommandValidator()
     {
-        RuleFor(x => x.CourseId).NotEmpty().WithMessage("CourseId is required.");
+        RuleFor(x => x.Id).NotEmpty().WithMessage("Id is required.");
     }
 }

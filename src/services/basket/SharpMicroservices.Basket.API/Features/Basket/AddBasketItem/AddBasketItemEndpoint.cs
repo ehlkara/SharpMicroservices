@@ -4,7 +4,7 @@ using SharpMicroservices.Shared.Filters;
 
 namespace SharpMicroservices.Basket.API.Features.Basket.AddBasketItem;
 
-public static class AddBasketItemEndpoint
+public static class DeleteBasketItemEndpoint
 {
     public static RouteGroupBuilder AddBasketItemGroupItemEndpoint(this RouteGroupBuilder group)
     {

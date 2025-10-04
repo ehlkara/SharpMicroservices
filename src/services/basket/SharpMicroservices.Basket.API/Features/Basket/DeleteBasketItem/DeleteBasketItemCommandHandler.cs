@@ -25,20 +25,16 @@ public class DeleteBasketItemCommandHandler(IDistributedCache distributedCache,I
 
         var currentBasket = JsonSerializer.Deserialize<BasketDto>(basketAsString);
 
-        var basketItemToDelete = currentBasket!.BasketItems.FirstOrDefault(bi => bi.Id == request.CourseId);
+        var basketItemToDelete = currentBasket!.BasketItems.FirstOrDefault(bi => bi.Id == request.Id);
         if (basketItemToDelete is null)
         {
             return ServiceResult.Error("Basket item not found.", HttpStatusCode.NotFound);
         }
         currentBasket.BasketItems.Remove(basketItemToDelete);
 
-        await CreateCacheAsync(currentBasket, cacheKey, cancellationToken);
-        return ServiceResult.SuccessAsNoContent();
-    }
-
-    private async Task CreateCacheAsync(BasketDto basket, string cacheKey, CancellationToken cancellationToken)
-    {
-        var basketAsString = JsonSerializer.Serialize(basket);
+        basketAsString = JsonSerializer.Serialize(currentBasket);
         await distributedCache.SetStringAsync(cacheKey, basketAsString, cancellationToken);
+
+        return ServiceResult.SuccessAsNoContent();
     }
 }
