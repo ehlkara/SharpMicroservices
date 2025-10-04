@@ -1,0 +1,6 @@
+@SharpMicroservices.Basket.API_HostAddress = http://localhost:5277
+
+GET {{SharpMicroservices.Basket.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
