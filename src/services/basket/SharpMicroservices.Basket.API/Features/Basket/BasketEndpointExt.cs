@@ -3,6 +3,7 @@ using SharpMicroservices.Basket.API.Features.Basket.AddBasketItem;
 using SharpMicroservices.Basket.API.Features.Basket.ApplyDiscountCoupon;
 using SharpMicroservices.Basket.API.Features.Basket.DeleteBasketItem;
 using SharpMicroservices.Basket.API.Features.Basket.GetBasket;
+using SharpMicroservices.Basket.API.Features.Basket.RemoveDiscountCoupon;
 
 namespace SharpMicroservices.Basket.API.Features.Basket;
 
@@ -15,6 +16,7 @@ public static class BasketEndpointExt
             .AddBasketItemGroupItemEndpoint()
             .DeleteBasketItemGroupItemEndpoint()
             .GetBasketItemGroupItemEndpoint()
-            .ApplyDiscountCouponGroupItemEndpoint();
+            .ApplyDiscountCouponGroupItemEndpoint()
+            .RemoveDiscountCouponGroupItemEndpoint();
     }
 }

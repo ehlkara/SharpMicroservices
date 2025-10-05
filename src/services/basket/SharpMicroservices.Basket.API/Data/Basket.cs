@@ -1,4 +1,6 @@
-﻿namespace SharpMicroservices.Basket.API.Data;
+﻿using System.Text.Json.Serialization;
+
+namespace SharpMicroservices.Basket.API.Data;
 // Anamic model = rich domain model (behavior + data)
 public class Basket
 {
@@ -6,8 +8,12 @@ public class Basket
     public List<BasketItem> Items { get; set; }
     public float? DiscountRate { get; set; }
     public string? Coupon { get; set; }
+
+    [JsonIgnore]
     public bool IsAppliedDiscount => DiscountRate is > 0 && !string.IsNullOrWhiteSpace(Coupon);
+    [JsonIgnore]
     public decimal TotalPrice => Items.Sum(i => i.Price);
+    [JsonIgnore]
     public decimal? TotalPriceByApplyDiscount => !IsAppliedDiscount ? null : Items.Sum(x => x.PriceByApplyDiscountRate);
 
     public Basket()
@@ -31,6 +37,8 @@ public class Basket
     }
     public void ApplyAvailableDiscount()
     {
+        if (!IsAppliedDiscount) return;
+
         foreach (var basket in Items)
         {
             basket.PriceByApplyDiscountRate = basket.Price * (decimal)(1 - DiscountRate!);
