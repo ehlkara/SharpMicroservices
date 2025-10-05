@@ -32,15 +32,15 @@ public class AddBasketItemCommandHandler(IDistributedCache distributedCache,IIde
         }
         currentBasket = JsonSerializer.Deserialize<BasketDto>(basketAsString);
 
-        var existingBasketItem = currentBasket!.BasketItems.FirstOrDefault(bi => bi.Id == request.CourseId);
+        var existingBasketItem = currentBasket!.Items.FirstOrDefault(bi => bi.Id == request.CourseId);
 
         if (existingBasketItem is not null)
         {
             // TODO: business rule
-            currentBasket?.BasketItems.Remove(existingBasketItem);
+            currentBasket?.Items.Remove(existingBasketItem);
         }
 
-        currentBasket?.BasketItems.Add(newBasketItem);
+        currentBasket?.Items.Add(newBasketItem);
         await CreateCacheAsync(currentBasket!, cacheKey, cancellationToken);
 
         return ServiceResult.SuccessAsNoContent();

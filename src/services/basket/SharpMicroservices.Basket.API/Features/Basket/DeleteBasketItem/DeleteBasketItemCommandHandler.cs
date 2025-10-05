@@ -25,12 +25,12 @@ public class DeleteBasketItemCommandHandler(IDistributedCache distributedCache,I
 
         var currentBasket = JsonSerializer.Deserialize<BasketDto>(basketAsString);
 
-        var basketItemToDelete = currentBasket!.BasketItems.FirstOrDefault(bi => bi.Id == request.Id);
+        var basketItemToDelete = currentBasket!.Items.FirstOrDefault(bi => bi.Id == request.Id);
         if (basketItemToDelete is null)
         {
             return ServiceResult.Error("Basket item not found.", HttpStatusCode.NotFound);
         }
-        currentBasket.BasketItems.Remove(basketItemToDelete);
+        currentBasket.Items.Remove(basketItemToDelete);
 
         basketAsString = JsonSerializer.Serialize(currentBasket);
         await distributedCache.SetStringAsync(cacheKey, basketAsString, cancellationToken);
