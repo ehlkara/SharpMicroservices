@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 using SharpMicroservices.Basket.API.Const;
-using SharpMicroservices.Basket.API.Dtos;
 using SharpMicroservices.Shared;
 using SharpMicroservices.Shared.Services;
 using System.Net;
@@ -23,7 +22,7 @@ public class DeleteBasketItemCommandHandler(IDistributedCache distributedCache,I
             return ServiceResult.Error("Basket not found.", HttpStatusCode.NotFound);
         }
 
-        var currentBasket = JsonSerializer.Deserialize<BasketDto>(basketAsString);
+        var currentBasket = JsonSerializer.Deserialize<Data.Basket>(basketAsString);
 
         var basketItemToDelete = currentBasket!.Items.FirstOrDefault(bi => bi.Id == request.Id);
         if (basketItemToDelete is null)

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 using SharpMicroservices.Basket.API.Const;
 using SharpMicroservices.Basket.API.Dtos;
@@ -9,7 +10,7 @@ using System.Text.Json;
 
 namespace SharpMicroservices.Basket.API.Features.Basket.GetBasket;
 
-public class GetBasketQueryHandler(IDistributedCache distributedCache, IIdentityService identityService) : IRequestHandler<GetBasketQuery, ServiceResult<BasketDto>>
+public class GetBasketQueryHandler(IDistributedCache distributedCache, IIdentityService identityService, IMapper mapper) : IRequestHandler<GetBasketQuery, ServiceResult<BasketDto>>
 {
     public async Task<ServiceResult<BasketDto>> Handle(GetBasketQuery request, CancellationToken cancellationToken)
     {
@@ -22,7 +23,8 @@ public class GetBasketQueryHandler(IDistributedCache distributedCache, IIdentity
             return ServiceResult<BasketDto>.Error("Basket not found", HttpStatusCode.NotFound);
         }
 
-        var basket = JsonSerializer.Deserialize<BasketDto>(basketAsString);
-        return ServiceResult<BasketDto>.SuccessAsOk(basket!);
+        var basket = JsonSerializer.Deserialize<Data.Basket>(basketAsString);
+        var basketDto = mapper.Map<BasketDto>(basket);
+        return ServiceResult<BasketDto>.SuccessAsOk(basketDto);
     }
 }

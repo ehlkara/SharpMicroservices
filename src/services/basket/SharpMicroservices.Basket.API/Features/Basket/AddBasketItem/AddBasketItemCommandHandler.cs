@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 using SharpMicroservices.Basket.API.Const;
-using SharpMicroservices.Basket.API.Dtos;
+using SharpMicroservices.Basket.API.Data;
 using SharpMicroservices.Shared;
 using SharpMicroservices.Shared.Services;
 using System.Text.Json;
@@ -19,18 +19,18 @@ public class AddBasketItemCommandHandler(IDistributedCache distributedCache,IIde
 
         var basketAsString = await distributedCache.GetStringAsync(cacheKey, cancellationToken);
 
-        BasketDto? currentBasket;
+        Data.Basket? currentBasket;
 
-        var newBasketItem = new BasketItemDto(request.CourseId, request.CourseName, request.CourseImageUrl, request.CoursePrice, null);
+        var newBasketItem = new BasketItem(request.CourseId, request.CourseName, request.CourseImageUrl, request.CoursePrice, null);
 
         if (string.IsNullOrEmpty(basketAsString))
         {
-            currentBasket = new BasketDto(userId, [newBasketItem]);
+            currentBasket = new Data.Basket(userId, [newBasketItem]);
             await CreateCacheAsync(currentBasket!, cacheKey, cancellationToken);
 
             return ServiceResult.SuccessAsNoContent();
         }
-        currentBasket = JsonSerializer.Deserialize<BasketDto>(basketAsString);
+        currentBasket = JsonSerializer.Deserialize<Data.Basket>(basketAsString);
 
         var existingBasketItem = currentBasket!.Items.FirstOrDefault(bi => bi.Id == request.CourseId);
 
@@ -46,7 +46,7 @@ public class AddBasketItemCommandHandler(IDistributedCache distributedCache,IIde
         return ServiceResult.SuccessAsNoContent();
     }
 
-    private async Task CreateCacheAsync(BasketDto basket, string cacheKey, CancellationToken cancellationToken)
+    private async Task CreateCacheAsync(Data.Basket basket, string cacheKey, CancellationToken cancellationToken)
     {
         var basketAsString = JsonSerializer.Serialize(basket);
         await distributedCache.SetStringAsync(cacheKey, basketAsString, cancellationToken);
