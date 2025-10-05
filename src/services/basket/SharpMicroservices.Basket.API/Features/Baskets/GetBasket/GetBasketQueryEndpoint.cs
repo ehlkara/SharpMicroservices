@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using SharpMicroservices.Shared.Extensions;
 
-namespace SharpMicroservices.Basket.API.Features.Basket.GetBasket;
+namespace SharpMicroservices.Basket.API.Features.Baskets.GetBasket;
 
 public static class GetBasketQueryEndpoint
 {

@@ -2,7 +2,7 @@
 using SharpMicroservices.Shared.Extensions;
 using SharpMicroservices.Shared.Filters;
 
-namespace SharpMicroservices.Basket.API.Features.Basket.ApplyDiscountCoupon;
+namespace SharpMicroservices.Basket.API.Features.Baskets.ApplyDiscountCoupon;
 
 public static class ApplyDiscountCouponEndpoint
 {

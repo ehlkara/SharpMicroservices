@@ -1,11 +1,11 @@
 ﻿using Asp.Versioning.Builder;
-using SharpMicroservices.Basket.API.Features.Basket.AddBasketItem;
-using SharpMicroservices.Basket.API.Features.Basket.ApplyDiscountCoupon;
-using SharpMicroservices.Basket.API.Features.Basket.DeleteBasketItem;
-using SharpMicroservices.Basket.API.Features.Basket.GetBasket;
-using SharpMicroservices.Basket.API.Features.Basket.RemoveDiscountCoupon;
+using SharpMicroservices.Basket.API.Features.Baskets.AddBasketItem;
+using SharpMicroservices.Basket.API.Features.Baskets.ApplyDiscountCoupon;
+using SharpMicroservices.Basket.API.Features.Baskets.DeleteBasketItem;
+using SharpMicroservices.Basket.API.Features.Baskets.GetBasket;
+using SharpMicroservices.Basket.API.Features.Baskets.RemoveDiscountCoupon;
 
-namespace SharpMicroservices.Basket.API.Features.Basket;
+namespace SharpMicroservices.Basket.API.Features.Baskets;
 
 public static class BasketEndpointExt
 {

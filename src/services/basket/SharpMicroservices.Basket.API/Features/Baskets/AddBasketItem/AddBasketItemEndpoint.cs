@@ -2,7 +2,7 @@
 using SharpMicroservices.Shared.Extensions;
 using SharpMicroservices.Shared.Filters;
 
-namespace SharpMicroservices.Basket.API.Features.Basket.AddBasketItem;
+namespace SharpMicroservices.Basket.API.Features.Baskets.AddBasketItem;
 
 public static class DeleteBasketItemEndpoint
 {

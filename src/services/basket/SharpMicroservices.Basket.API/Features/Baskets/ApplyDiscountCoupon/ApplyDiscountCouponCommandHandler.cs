@@ -1,18 +1,14 @@
 ﻿using MediatR;
-using Microsoft.Extensions.Caching.Distributed;
-using SharpMicroservices.Basket.API.Const;
 using SharpMicroservices.Shared;
-using SharpMicroservices.Shared.Services;
 using System.Text.Json;
 
-namespace SharpMicroservices.Basket.API.Features.Basket.ApplyDiscountCoupon;
+namespace SharpMicroservices.Basket.API.Features.Baskets.ApplyDiscountCoupon;
 
-public class ApplyDiscountCouponCommandHandler(IIdentityService identityService, IDistributedCache distributedCache) : IRequestHandler<ApplyDiscountCouponCommand, ServiceResult>
+public class ApplyDiscountCouponCommandHandler(BasketService basketService) : IRequestHandler<ApplyDiscountCouponCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(ApplyDiscountCouponCommand request, CancellationToken cancellationToken)
     {
-        var cacheKey = String.Format(BasketConst.BasketCacheKey, identityService.GetUserId);
-        var basketAsJson = await distributedCache.GetStringAsync(cacheKey, cancellationToken);
+        var basketAsJson = await basketService.GetBasketFromCache(cancellationToken);
 
         if (string.IsNullOrEmpty(basketAsJson))
         {
@@ -28,8 +24,7 @@ public class ApplyDiscountCouponCommandHandler(IIdentityService identityService,
 
         basket.ApplyNewDiscount(request.DiscountRate, request.Coupon);
 
-        basketAsJson = JsonSerializer.Serialize(basket);
-        await distributedCache.SetStringAsync(cacheKey, basketAsJson, cancellationToken);
+        await basketService.CreateBasketCacheAsync(basket, cancellationToken);
 
         return ServiceResult.SuccessAsNoContent();
     }

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace SharpMicroservices.Basket.API.Features.Basket.AddBasketItem;
+namespace SharpMicroservices.Basket.API.Features.Baskets.AddBasketItem;
 
 public class AddBasketItemCommandValidator : AbstractValidator<AddBasketItemCommand>
 {

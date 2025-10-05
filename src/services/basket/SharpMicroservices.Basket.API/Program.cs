@@ -1,5 +1,5 @@
 using SharpMicroservices.Basket.API;
-using SharpMicroservices.Basket.API.Features.Basket;
+using SharpMicroservices.Basket.API.Features.Baskets;
 using SharpMicroservices.Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +10,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCommonServiceExt(typeof(BasketAssembly));
+builder.Services.AddScoped<BasketService>();
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetConnectionString("Redis");

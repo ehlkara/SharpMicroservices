@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using SharpMicroservices.Basket.API.Dtos;
 
-namespace SharpMicroservices.Basket.API.Features.Basket;
+namespace SharpMicroservices.Basket.API.Features.Baskets;
 
 public class BasketMapping : Profile
 {

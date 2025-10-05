@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using SharpMicroservices.Shared.Extensions;
 
-namespace SharpMicroservices.Basket.API.Features.Basket.DeleteBasketItem;
+namespace SharpMicroservices.Basket.API.Features.Baskets.DeleteBasketItem;
 
 public static class DeleteBasketItemEndpoint
 {

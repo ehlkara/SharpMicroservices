@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace SharpMicroservices.Basket.API.Features.Basket.DeleteBasketItem;
+namespace SharpMicroservices.Basket.API.Features.Baskets.DeleteBasketItem;
 
 public class DeleteBasketCommandValidator : AbstractValidator<DeleteBasketItemCommand>
 {
