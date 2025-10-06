@@ -1,5 +1,6 @@
 using Microsoft.Extensions.FileProviders;
 using SharpMicroservices.File.Api;
+using SharpMicroservices.File.Api.Features.File;
 using SharpMicroservices.Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services.AddVersioningExt();
 var app = builder.Build();
 
 app.UseStaticFiles();
+app.AddFileGroupEndpointExt(app.AddVersionSetExt());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

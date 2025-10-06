@@ -7,12 +7,12 @@ public static class UploadFileCommandEnpoint
 {
     public static RouteGroupBuilder UploadFileGroupItemEndpoint(this RouteGroupBuilder group)
     {
-        group.MapPost("/", async (UploadFileCommand command, IMediator mediator) => (await mediator.Send(command)).ToGenericResult())
+        group.MapPost("/", async (IFormFile file, IMediator mediator) => (await mediator.Send(new UploadFileCommand(file))).ToGenericResult())
             .WithName("UploadFile")
             .MapToApiVersion(1, 0)
             .Produces<Guid>(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest)
-            .Produces(StatusCodes.Status500InternalServerError);
+            .Produces(StatusCodes.Status500InternalServerError).DisableAntiforgery();
 
         return group;
     }
