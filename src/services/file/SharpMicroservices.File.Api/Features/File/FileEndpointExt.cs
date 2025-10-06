@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning.Builder;
+using SharpMicroservices.File.Api.Features.File.Delete;
 using SharpMicroservices.File.Api.Features.File.Upload;
 
 namespace SharpMicroservices.File.Api.Features.File;
@@ -9,6 +10,7 @@ public static class FileEndpointExt
     {
         app.MapGroup("api/v{version:apiVersion}/files").WithTags("Files")
             .WithApiVersionSet(apiVersionSet)
-            .UploadFileGroupItemEndpoint();
+            .UploadFileGroupItemEndpoint()
+            .DeleteFileGroupItemEndpoint();
     }
 }

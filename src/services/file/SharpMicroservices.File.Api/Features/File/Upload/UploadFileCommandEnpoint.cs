@@ -3,7 +3,7 @@ using SharpMicroservices.Shared.Extensions;
 
 namespace SharpMicroservices.File.Api.Features.File.Upload;
 
-public static class UploadFileCommandEnpoint
+public static class DeleteFileCommandEnpoint
 {
     public static RouteGroupBuilder UploadFileGroupItemEndpoint(this RouteGroupBuilder group)
     {
