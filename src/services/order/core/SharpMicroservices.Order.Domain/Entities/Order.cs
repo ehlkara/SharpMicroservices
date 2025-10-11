@@ -12,7 +12,7 @@ public class Order : BaseEntity<Guid>
     public int AddressId { get; set; }
     public decimal TotalPrice { get; set; }
     public float? DiscountRate { get; set; }
-    public Guid PaymentId { get; set; }
+    public Guid? PaymentId { get; set; }
 
     public List<OrderItem> OrderItems { get; set; } = new();
     public Address Address { get; set; } = null!;
