@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SharpMicroservices.Order.Application.Repositories.Contracts;
+using SharpMicroservices.Order.Application.Contracts.Repositories;
+using SharpMicroservices.Order.Application.Contracts.UnitOfWork;
 using SharpMicroservices.Order.Domain.Entities;
 using SharpMicroservices.Shared;
 using SharpMicroservices.Shared.Services;
@@ -8,18 +9,17 @@ using System.Net;
 
 namespace SharpMicroservices.Order.Application.Features.Orders.Create;
 
-public class CreateOrderCommandHandler(IGenericRepository<Guid, Domain.Entities.Order> orderRepository, IGenericRepository<int, Address> addressRepository, IIdentityService identityService) : IRequestHandler<CreateOrderCommand, ServiceResult>
+public class CreateOrderCommandHandler(IOrderRepository orderRepository, IIdentityService identityService, IUnitOfWork unitOfWork) : IRequestHandler<CreateOrderCommand, ServiceResult>
 {
-    public Task<ServiceResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+    public async Task<ServiceResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        if(!request.Items.Any())
-            return Task.FromResult(ServiceResult.Error(new ProblemDetails
+        if (!request.Items.Any())
+            return ServiceResult.Error(new ProblemDetails
             {
                 Title = "Invalid Order",
                 Detail = "Order must contain at least one item."
-            }, HttpStatusCode.BadRequest));
+            }, HttpStatusCode.BadRequest);
 
-        //TODO: begin transaction
         var newAddress = new Address
         {
             Province = request.Address.Province,
@@ -28,25 +28,26 @@ public class CreateOrderCommandHandler(IGenericRepository<Guid, Domain.Entities.
             ZipCode = request.Address.ZipCode,
             Line = request.Address.Line
         };
-        addressRepository.Add(newAddress);
-        //unitOfWork.Commit();
-
         var order = Domain.Entities.Order.CreateUnPaidOrder(identityService.GetUserId, request.discountRate, newAddress.Id);
 
         foreach (var item in request.Items)
         {
             order.AddOrderItem(item.ProductId, item.ProductName, item.UnitPrice);
         }
+
+        order.Address = newAddress;
+
         orderRepository.Add(order);
-        //unitOfWork.Commit();
+        await unitOfWork.CommitAsync(cancellationToken);
 
         var paymentId = Guid.Empty;
+
         // Payment process would be here...
 
         order.MarkAsPaid(paymentId);
         orderRepository.Update(order);
-        //unitOfWork.Commit();
+        await unitOfWork.CommitAsync(cancellationToken);
 
-        return Task.FromResult(ServiceResult.SuccessAsNoContent());
+        return ServiceResult.SuccessAsNoContent();
     }
 }

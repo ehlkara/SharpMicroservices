@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using SharpMicroservices.Order.Application.Repositories.Contracts;
+using SharpMicroservices.Order.Application.Contracts.Repositories;
 using SharpMicroservices.Order.Persistence;
 using SharpMicroservices.Order.Persistence.Repositories;
 

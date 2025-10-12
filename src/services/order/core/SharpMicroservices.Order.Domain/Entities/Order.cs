@@ -46,6 +46,20 @@ public class Order : BaseEntity<Guid>
         };
     }
 
+    public static Order CreateUnPaidOrder(Guid buyerId, float? discountRate)
+    {
+        return new Order
+        {
+            Id = NewId.NextGuid(),
+            Code = GenerateCode(),
+            BuyerId = buyerId,
+            Created = DateTime.UtcNow,
+            Status = OrderStatus.WaitingForPayment,
+            DiscountRate = discountRate,
+            TotalPrice = 0m
+        };
+    }
+
     public void AddOrderItem(Guid productId, string productName, decimal unitPrice)
     {
         var orderItem = new OrderItem();
