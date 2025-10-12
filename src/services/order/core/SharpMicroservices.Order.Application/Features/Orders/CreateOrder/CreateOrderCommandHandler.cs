@@ -7,7 +7,7 @@ using SharpMicroservices.Shared;
 using SharpMicroservices.Shared.Services;
 using System.Net;
 
-namespace SharpMicroservices.Order.Application.Features.Orders.Create;
+namespace SharpMicroservices.Order.Application.Features.Orders.CreateOrder;
 
 public class CreateOrderCommandHandler(IOrderRepository orderRepository, IIdentityService identityService, IUnitOfWork unitOfWork) : IRequestHandler<CreateOrderCommand, ServiceResult>
 {

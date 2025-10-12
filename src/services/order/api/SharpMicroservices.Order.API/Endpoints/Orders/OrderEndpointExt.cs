@@ -8,6 +8,7 @@ public static class OrderEndpointExt
     {
         app.MapGroup("api/v{version:apiVersion}/orders").WithTags("Orders")
             .WithApiVersionSet(apiVersionSet)
-            .CreateOrderGroupItemEndpoint();
+            .CreateOrderGroupItemEndpoint()
+            .GetOrdersGroupItemEndpoint();
     }
 }

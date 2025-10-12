@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SharpMicroservices.Order.Application.Features.Orders.Create;
+using SharpMicroservices.Order.Application.Features.Orders.CreateOrder;
 using SharpMicroservices.Shared.Extensions;
 using SharpMicroservices.Shared.Filters;
 

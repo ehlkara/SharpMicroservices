@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace SharpMicroservices.Order.Application.Features.Orders.Create;
+namespace SharpMicroservices.Order.Application.Features.Orders.CreateOrder;
 
 public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
 {
