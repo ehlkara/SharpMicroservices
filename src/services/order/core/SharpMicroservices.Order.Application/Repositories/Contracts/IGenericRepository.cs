@@ -1,16 +1,17 @@
-﻿using System.Linq.Expressions;
+﻿using SharpMicroservices.Order.Domain.Entities;
+using System.Linq.Expressions;
 
-namespace SharpMicroservices.Order.Application.Contracts;
+namespace SharpMicroservices.Order.Application.Repositories.Contracts;
 
-public interface IGenericRepository<TId, TEntity> where TEntity : class where TId : struct
+public interface IGenericRepository<TId, TEntity> where TId : struct where TEntity : BaseEntity<TId>
 {
     public Task<bool> AnyAsync(TId id);
     public Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate);
     Task<List<TEntity>> GetAllAsync();
     Task<List<TEntity>> GetAllPagedAsync(int pageNumber, int pageSize);
-    ValueTask<TEntity> GetByIdAsync(TId id);
+    ValueTask<TEntity?> GetByIdAsync(TId id);
     IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
     void Add(TEntity entity);
     void Update(TEntity entity);
-    void Delete(TEntity entity);
+    void Remove(TEntity entity);
 }
