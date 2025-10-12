@@ -5,7 +5,7 @@ POST {{baseAddress}}/api/v1/orders
 Content-Type: application/json
 Accept: application/json
 {
-  "DiscountRate": 100,
+  "DiscountRate": 10,
   "Address": {
     "Line": "123 Main St",
     "Province": "Ontario",
@@ -33,3 +33,8 @@ Accept: application/json
     }
   ]
 }
+
+### Get All Orders by User ID
+GET {{baseAddress}}/api/v1/orders
+Accept: application/json
+###

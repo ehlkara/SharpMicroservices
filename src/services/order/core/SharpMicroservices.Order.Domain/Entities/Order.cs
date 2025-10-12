@@ -63,6 +63,12 @@ public class Order : BaseEntity<Guid>
     public void AddOrderItem(Guid productId, string productName, decimal unitPrice)
     {
         var orderItem = new OrderItem();
+
+        if (DiscountRate.HasValue)
+        {
+            unitPrice -= unitPrice * ((decimal)DiscountRate.Value / 100);
+        }
+
         orderItem.SetItem(productId, productName, unitPrice);
         OrderItems.Add(orderItem);
 
@@ -90,10 +96,5 @@ public class Order : BaseEntity<Guid>
     private void CalculateTotalPrice()
     {
         TotalPrice = OrderItems.Sum(oi => oi.UnitPrice);
-        if (DiscountRate.HasValue && DiscountRate.Value > 0)
-        {
-            TotalPrice -= TotalPrice * ((decimal)DiscountRate.Value / 100);
-        }
     }
-
 }
