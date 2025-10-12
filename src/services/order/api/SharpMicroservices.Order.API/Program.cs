@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SharpMicroservices.Order.API.Endpoints.Orders;
+using SharpMicroservices.Order.Application;
 using SharpMicroservices.Order.Application.Contracts.Repositories;
 using SharpMicroservices.Order.Application.Contracts.UnitOfWork;
 using SharpMicroservices.Order.Persistence;
@@ -14,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddCommonServiceExt(typeof(OrderApplicationAssembly));
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));

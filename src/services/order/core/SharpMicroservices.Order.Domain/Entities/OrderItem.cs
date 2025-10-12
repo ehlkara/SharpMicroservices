@@ -10,7 +10,7 @@ public class OrderItem : BaseEntity<int>
 
     public void SetItem(Guid productId, string productName, decimal unitPrice)
     {
-        if(string.IsNullOrWhiteSpace(ProductName))
+        if(!string.IsNullOrWhiteSpace(ProductName))
         {
             throw new ArgumentException("Product name cannot be empty.", nameof(productName));
         }
