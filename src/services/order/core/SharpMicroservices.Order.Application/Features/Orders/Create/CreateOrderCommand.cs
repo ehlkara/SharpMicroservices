@@ -1,6 +1,8 @@
-﻿namespace SharpMicroservices.Order.Application.Features.Orders.Create;
+﻿using SharpMicroservices.Shared;
 
-public record CreateOrderCommand(float? discountRate, AddressDto Address, PaymentDto Payment, List<OrderItemDto> Items);
+namespace SharpMicroservices.Order.Application.Features.Orders.Create;
+
+public record CreateOrderCommand(float? discountRate, AddressDto Address, PaymentDto Payment, List<OrderItemDto> Items) : IRequestByServiceResult;
 
 public record AddressDto(string Province, string District, string Street, string ZipCode, string Line);
 
