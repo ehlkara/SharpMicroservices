@@ -6,22 +6,22 @@ using System.Net;
 
 namespace SharpMicroservices.Payment.API.Features.Payments.Create;
 
-public class CreatePaymentCommandHandler(AppDbContext context, IIdentityService identityService) : IRequestHandler<CreatePaymentCommand, ServiceResult>
+public class CreatePaymentCommandHandler(AppDbContext context, IIdentityService identityService) : IRequestHandler<CreatePaymentCommand, ServiceResult<Guid>>
 {
-    public async Task<ServiceResult> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
+    public async Task<ServiceResult<Guid>> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
     {
         var (isSuccess, errorMessage) = await ProcessPaymentAsync();
 
         if (!isSuccess)
         {
-            return ServiceResult.Error("Payment Processing Failed", errorMessage ?? "An error occurred during payment processing.", HttpStatusCode.BadRequest);
+            return ServiceResult<Guid>.Error("Payment Processing Failed", errorMessage ?? "An error occurred during payment processing.", HttpStatusCode.BadRequest);
         }
 
         var newPayment = new Repositories.Payment(identityService.GetUserId, request.OrderCode, request.Amount);
         newPayment.UpdateStatus(PaymentStatus.Completed);
         context.Payments.Add(newPayment);
         await context.SaveChangesAsync(cancellationToken);
-        return ServiceResult.SuccessAsNoContent();
+        return ServiceResult<Guid>.SuccessAsOk(newPayment.Id);
     }
 
     private async Task<(bool isSuccess, string? errorMessage)> ProcessPaymentAsync()

@@ -14,6 +14,7 @@ public static class CreatePaymentCommandEndpoint
         })
         .WithName("CreatePayment")
         .WithTags("Payments")
+        .MapToApiVersion(1, 0)
         .Produces(StatusCodes.Status204NoContent)
         .ProducesValidationProblem()
         .ProducesProblem(StatusCodes.Status400BadRequest)
