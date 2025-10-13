@@ -8,7 +8,7 @@ public static class PaymentEndpointExt
 {
     public static void AddPaymentGroupEndpointExt(this IEndpointRouteBuilder app, ApiVersionSet apiVersionSet)
     {
-        app.MapGroup("api/v{version:apiversion}/payment").WithTags("payments").WithApiVersionSet(apiVersionSet)
+        app.MapGroup("api/v{version:apiversion}/payments").WithTags("payments").WithApiVersionSet(apiVersionSet)
             .CreatePaymentGroupItemEndpoint()
             .GetAllPaymentsByUserIdGroupItemEndpoint();
     }

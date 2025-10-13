@@ -1,6 +1,17 @@
-@SharpMicroservices.Payment.API_HostAddress = http://localhost:5067
-
-GET {{SharpMicroservices.Payment.API_HostAddress}}/weatherforecast/
-Accept: application/json
+@baseAddress = http://localhost:5067
 
 ###
+POST {{baseAddress}}/api/v1/payments
+Content-Type: application/json
+Accept: application/json
+{
+  "OrderCode" : "3a21c5e0-a8bc-4c50-bf71-6fbe777004ca",
+  "CardNumber" : "4111111111111111",
+  "CardHolderName" : "John Doe",
+  "CardExpiration" : "12/25",
+  "CardSecurityNumber": "123",
+  "Amount" : "150.75"
+}
+
+### Get Payment by User Id
+GET {{baseAddress}}/api/v1/payments
