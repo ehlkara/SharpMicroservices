@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SharpMicroservices.Payment.API;
+using SharpMicroservices.Payment.API.Features.Payments;
 using SharpMicroservices.Payment.API.Repositories;
 using SharpMicroservices.Shared.Extensions;
 
@@ -20,6 +21,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 
 var app = builder.Build();
+app.AddPaymentGroupEndpointExt(app.AddVersionSetExt());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
