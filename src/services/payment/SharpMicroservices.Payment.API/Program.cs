@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using SharpMicroservices.Payment.API;
+using SharpMicroservices.Payment.API.Repositories;
 using SharpMicroservices.Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCommonServiceExt(typeof(PaymentAssembly));
 builder.Services.AddVersioningExt();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseInMemoryDatabase("payment-in-memory-db");
+});
 
 
 var app = builder.Build();
