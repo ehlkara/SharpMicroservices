@@ -17,8 +17,10 @@ builder.Services.AddStackExchangeRedisCache(options =>
 });
 builder.Services.AddVersioningExt();
 
+builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 
 var app = builder.Build();
+app.AddBasketGroupEndpointExt(app.AddVersionSetExt());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -28,6 +30,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.AddBasketGroupEndpointExt(app.AddVersionSetExt());
+app.UseAuthentication();
+app.UseAuthorization();
 
 await app.RunAsync();

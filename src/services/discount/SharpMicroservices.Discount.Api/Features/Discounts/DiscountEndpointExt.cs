@@ -11,6 +11,6 @@ public static class DiscountEndpointExt
         app.MapGroup("api/v{version:apiVersion}/discounts").WithTags("Discounts")
             .WithApiVersionSet(apiVersionSet)
             .CreateDiscountGroupItemEndpoint()
-            .GetDiscountByCodeGroupItemEndpoint();
+            .GetDiscountByCodeGroupItemEndpoint().RequireAuthorization();
     }
 }
