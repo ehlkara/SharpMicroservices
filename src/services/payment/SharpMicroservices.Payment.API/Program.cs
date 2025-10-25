@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SharpMicroservices.Bus;
 using SharpMicroservices.Payment.API;
 using SharpMicroservices.Payment.API.Features.Payments;
 using SharpMicroservices.Payment.API.Repositories;
@@ -20,6 +21,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
+builder.Services.AddMassTransitExt(builder.Configuration);
 
 var app = builder.Build();
 app.AddPaymentGroupEndpointExt(app.AddVersionSetExt());

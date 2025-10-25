@@ -1,3 +1,4 @@
+using SharpMicroservices.Bus;
 using SharpMicroservices.Catalog.API;
 using SharpMicroservices.Catalog.API.Features.Categories;
 using SharpMicroservices.Catalog.API.Features.Courses;
@@ -15,6 +16,7 @@ builder.Services.AddCommonServiceExt(typeof(CatalogAssembly));
 builder.Services.AddVersioningExt();
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
+builder.Services.AddMassTransitExt(builder.Configuration);
 
 var app = builder.Build();
 

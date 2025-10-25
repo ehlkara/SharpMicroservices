@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SharpMicroservices.Bus;
 using SharpMicroservices.Order.API.Endpoints.Orders;
 using SharpMicroservices.Order.Application;
 using SharpMicroservices.Order.Application.Contracts.Repositories;
@@ -28,6 +29,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddVersioningExt();
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
+builder.Services.AddMassTransitExt(builder.Configuration);
 
 var app = builder.Build();
 app.AddOrderGroupEndpointExt(app.AddVersionSetExt());
