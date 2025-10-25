@@ -18,5 +18,5 @@ Authorization: Bearer {{passwordToken}}
 ### Get All Payments
 GET {{baseAddress}}/v1/payments
 Accept: application/json
-Authorization: Bearer {{clientCredentialtoken}}
+Authorization: Bearer {{passwordToken}}
 ###
