@@ -1,7 +1,8 @@
-﻿
+﻿using SharpMicroservices.Bus.Commands;
+
 namespace SharpMicroservices.Catalog.API.Features.Courses.Create;
 
-public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper) : IRequestHandler<CreateCourseCommand, ServiceResult<Guid>>
+public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper, IPublishEndpoint publishEndpoint) : IRequestHandler<CreateCourseCommand, ServiceResult<Guid>>
 {
     public async Task<ServiceResult<Guid>> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
     {
@@ -27,8 +28,18 @@ public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper) : 
             EducatorFullName = "Ehlullah Karakurt"
         };
 
-        await context.Courses.AddAsync(newCourse);
+        await context.Courses.AddAsync(newCourse, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
+
+        if (request.Picture is not null)
+        {
+            using var memoryStream = new MemoryStream();
+            await request.Picture.CopyToAsync(memoryStream, cancellationToken);
+            var pictureAsByteArray = memoryStream.ToArray();
+
+            var uploadPictureCommand = new UploadCoursePictureCommand(newCourse.Id, pictureAsByteArray);
+            await publishEndpoint.Publish(uploadPictureCommand, cancellationToken);
+        }
 
         return ServiceResult<Guid>.SuccessAsCreated(newCourse.Id, $"/api/courses/{newCourse.Id}");
     }
