@@ -6,10 +6,12 @@ using System.Net;
 
 namespace SharpMicroservices.Payment.API.Features.Payments.Create;
 
-public class CreatePaymentCommandHandler(AppDbContext context, IIdentityService identityService) : IRequestHandler<CreatePaymentCommand, ServiceResult<Guid>>
+public class CreatePaymentCommandHandler(AppDbContext context, IIdentityService identityService, IHttpContextAccessor httpContextAccessor) : IRequestHandler<CreatePaymentCommand, ServiceResult<Guid>>
 {
     public async Task<ServiceResult<Guid>> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
     {
+        var claims = httpContextAccessor.HttpContext?.User.Claims;
+
         var (isSuccess, errorMessage) = await ProcessPaymentAsync();
 
         if (!isSuccess)

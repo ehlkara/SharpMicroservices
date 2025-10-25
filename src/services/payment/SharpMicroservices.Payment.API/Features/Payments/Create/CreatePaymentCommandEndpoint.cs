@@ -19,7 +19,7 @@ public static class CreatePaymentCommandEndpoint
         .ProducesValidationProblem()
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status401Unauthorized)
-        .ProducesProblem(StatusCodes.Status500InternalServerError);
+        .ProducesProblem(StatusCodes.Status500InternalServerError).RequireAuthorization("Password");
         return group;
     }
 }

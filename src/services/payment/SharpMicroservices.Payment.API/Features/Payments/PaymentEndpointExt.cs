@@ -10,6 +10,6 @@ public static class PaymentEndpointExt
     {
         app.MapGroup("api/v{version:apiversion}/payments").WithTags("payments").WithApiVersionSet(apiVersionSet)
             .CreatePaymentGroupItemEndpoint()
-            .GetAllPaymentsByUserIdGroupItemEndpoint().RequireAuthorization();
+            .GetAllPaymentsByUserIdGroupItemEndpoint();
     }
 }

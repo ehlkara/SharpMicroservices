@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using SharpMicroservices.Shared.Options;
+using System.Security.Claims;
 
 namespace SharpMicroservices.Shared.Extensions;
 
@@ -25,9 +26,37 @@ public static class AuthenticationExt
                 ValidateLifetime = true,
                 ValidateAudience = true,
             };
+        }).AddJwtBearer("ClientCredentialSchema", options =>
+        {
+            options.Authority = identityOptions.Address;
+            options.Audience = identityOptions.Audience;
+            options.RequireHttpsMetadata = false;
+
+            options.TokenValidationParameters = new TokenValidationParameters()
+            {
+                ValidateIssuer = true,
+                ValidateIssuerSigningKey = true,
+                ValidateLifetime = true,
+                ValidateAudience = true,
+            };
         });
 
-        services.AddAuthorization();
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("ClientCredential", policy =>
+            {
+                policy.AuthenticationSchemes.Add("ClientCredentialSchema");
+                policy.RequireAuthenticatedUser();
+                policy.RequireClaim("client_id");
+            });
+
+            options.AddPolicy("Password", policy =>
+            {
+                policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                policy.RequireAuthenticatedUser();
+                policy.RequireClaim(ClaimTypes.Email);
+            });
+        });
 
         //sign
         //Aud => payment.api
