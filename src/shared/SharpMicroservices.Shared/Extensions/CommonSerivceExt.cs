@@ -13,7 +13,7 @@ public static class CommonSerivceExt
 
         services.AddFluentValidationAutoValidation();
         services.AddValidatorsFromAssemblyContaining(assembly);
-        services.AddScoped<IIdentityService, IdentityServiceFake>();
+        services.AddScoped<IIdentityService, IdentityService>();
 
         services.AddAutoMapper(cfg => { }, assembly.Assembly);
 

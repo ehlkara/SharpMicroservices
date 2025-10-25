@@ -10,7 +10,7 @@ public class GetPaymentsByUserIdQueryHandler(AppDbContext context, IIdentityServ
 {
     public async Task<ServiceResult<List<GetPaymentsByUserIdResponse>>> Handle(GetPaymentsByUserIdQuery request, CancellationToken cancellationToken)
     {
-        var userId = identityService.GetUserId;
+        var userId = identityService.UserId;
         var payments = await context.Payments.Where(p => p.UserId == userId).Select(p => new GetPaymentsByUserIdResponse(p.Id, p.OrderCode, p.Amount.ToString("C"), p.Created, p.PaymentStatus)).ToListAsync(cancellationToken);
 
         return ServiceResult<List<GetPaymentsByUserIdResponse>>.SuccessAsOk(payments);

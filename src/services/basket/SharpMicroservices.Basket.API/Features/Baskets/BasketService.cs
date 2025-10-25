@@ -7,7 +7,7 @@ namespace SharpMicroservices.Basket.API.Features.Baskets;
 
 public class BasketService(IIdentityService identityService, IDistributedCache distributedCache)
 {
-    private string GetCacheKey() => String.Format(BasketConst.BasketCacheKey, identityService.GetUserId);
+    private string GetCacheKey() => String.Format(BasketConst.BasketCacheKey, identityService.UserId);
 
     public async Task<string?> GetBasketFromCache(CancellationToken cancellationToken)
     {

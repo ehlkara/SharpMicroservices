@@ -10,8 +10,6 @@ public class CreatePaymentCommandHandler(AppDbContext context, IIdentityService 
 {
     public async Task<ServiceResult<Guid>> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
     {
-        var claims = httpContextAccessor.HttpContext?.User.Claims;
-
         var (isSuccess, errorMessage) = await ProcessPaymentAsync();
 
         if (!isSuccess)
@@ -19,7 +17,7 @@ public class CreatePaymentCommandHandler(AppDbContext context, IIdentityService 
             return ServiceResult<Guid>.Error("Payment Processing Failed", errorMessage ?? "An error occurred during payment processing.", HttpStatusCode.BadRequest);
         }
 
-        var newPayment = new Repositories.Payment(identityService.GetUserId, request.OrderCode, request.Amount);
+        var newPayment = new Repositories.Payment(identityService.UserId, request.OrderCode, request.Amount);
         newPayment.UpdateStatus(PaymentStatus.Completed);
         context.Payments.Add(newPayment);
         await context.SaveChangesAsync(cancellationToken);

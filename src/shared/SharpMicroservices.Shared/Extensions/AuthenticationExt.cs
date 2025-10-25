@@ -25,6 +25,8 @@ public static class AuthenticationExt
                 ValidateIssuerSigningKey = true,
                 ValidateLifetime = true,
                 ValidateAudience = true,
+                RoleClaimType = "roles",
+                NameClaimType = "preferred_username"
             };
         }).AddJwtBearer("ClientCredentialSchema", options =>
         {
@@ -43,6 +45,12 @@ public static class AuthenticationExt
 
         services.AddAuthorization(options =>
         {
+            // role göre policy tanımı yapıp servislere geçebiliriz.
+            //options.AddPolicy("ClientCredential", policy =>
+            //{
+            //    policy.RequireRole("x");
+            //});
+
             options.AddPolicy("ClientCredential", policy =>
             {
                 policy.AuthenticationSchemes.Add("ClientCredentialSchema");
