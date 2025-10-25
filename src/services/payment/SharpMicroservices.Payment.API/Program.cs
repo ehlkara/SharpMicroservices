@@ -19,6 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseInMemoryDatabase("payment-in-memory-db");
 });
 
+builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 
 var app = builder.Build();
 app.AddPaymentGroupEndpointExt(app.AddVersionSetExt());
@@ -30,5 +31,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.MapOpenApi();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 await app.RunAsync();
