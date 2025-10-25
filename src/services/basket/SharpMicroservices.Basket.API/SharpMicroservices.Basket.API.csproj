@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\shared\SharpMicroservices.Bus\SharpMicroservices.Bus.csproj" />
     <ProjectReference Include="..\..\..\shared\SharpMicroservices.Shared\SharpMicroservices.Shared.csproj" />
   </ItemGroup>
 

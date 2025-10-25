@@ -53,6 +53,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gateway", "gateway", "{2A26
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMicroservices.Gateway", "src\services\gateway\SharpMicroservices.Gateway\SharpMicroservices.Gateway.csproj", "{5D450066-5055-48B9-892F-044F789DC4CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMicroservices.Bus", "src\shared\SharpMicroservices.Bus\SharpMicroservices.Bus.csproj", "{D24C0424-0529-438B-842D-875C9FACDCE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,10 @@ Global
 		{5D450066-5055-48B9-892F-044F789DC4CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D450066-5055-48B9-892F-044F789DC4CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D450066-5055-48B9-892F-044F789DC4CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D24C0424-0529-438B-842D-875C9FACDCE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D24C0424-0529-438B-842D-875C9FACDCE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D24C0424-0529-438B-842D-875C9FACDCE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D24C0424-0529-438B-842D-875C9FACDCE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,6 +141,7 @@ Global
 		{C1090127-F9E3-40BC-B2B0-BD26714F8E98} = {1BF6EF0F-69FE-4977-BF49-2AC1719551F5}
 		{2A2661A6-F342-43D3-AF9E-1F2323874AB7} = {87C1B51C-2B46-408E-B663-A6FEB34EE7C4}
 		{5D450066-5055-48B9-892F-044F789DC4CF} = {2A2661A6-F342-43D3-AF9E-1F2323874AB7}
+		{D24C0424-0529-438B-842D-875C9FACDCE1} = {FBEEF537-20B4-4A80-BE51-75405CEB2403}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {117084E9-879C-4176-9237-416999E226F4}

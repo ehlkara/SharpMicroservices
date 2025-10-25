@@ -1,5 +1,4 @@
-﻿using MassTransit;
-using System.Text;
+﻿using System.Text;
 
 namespace SharpMicroservices.Order.Domain.Entities;
 
@@ -35,7 +34,7 @@ public class Order : BaseEntity<Guid>
     {
         return new Order
         {
-            Id = NewId.NextGuid(),
+            Id = Guid.CreateVersion7(),
             Code = GenerateCode(),
             BuyerId = buyerId,
             Created = DateTime.UtcNow,
@@ -50,7 +49,7 @@ public class Order : BaseEntity<Guid>
     {
         return new Order
         {
-            Id = NewId.NextGuid(),
+            Id = Guid.CreateVersion7(),
             Code = GenerateCode(),
             BuyerId = buyerId,
             Created = DateTime.UtcNow,
