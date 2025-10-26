@@ -1,4 +1,3 @@
-using SharpMicroservices.Bus;
 using SharpMicroservices.Discount.Api;
 using SharpMicroservices.Discount.Api.Features.Discounts;
 using SharpMicroservices.Discount.Api.Options;
@@ -18,7 +17,7 @@ builder.Services.AddCommonServiceExt(typeof(DiscountAssembly));
 builder.Services.AddVersioningExt();
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
-builder.Services.AddCommonMassTransitExt(builder.Configuration);
+builder.Services.AddMassTransitExt(builder.Configuration);
 var app = builder.Build();
 
 app.AddDisctountGroupEndpointExt(app.AddVersionSetExt());
