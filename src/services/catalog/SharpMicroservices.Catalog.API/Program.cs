@@ -17,7 +17,6 @@ builder.Services.AddVersioningExt();
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 builder.Services.AddMassTransitExt(builder.Configuration);
-
 var app = builder.Build();
 
 app.AddSeedDataExt().ContinueWith(x =>

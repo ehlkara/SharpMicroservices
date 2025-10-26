@@ -19,7 +19,7 @@ builder.Services.AddStackExchangeRedisCache(options =>
 builder.Services.AddVersioningExt();
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
-builder.Services.AddMassTransitExt(builder.Configuration);
+builder.Services.AddCommonMassTransitExt(builder.Configuration);
 
 var app = builder.Build();
 app.AddBasketGroupEndpointExt(app.AddVersionSetExt());

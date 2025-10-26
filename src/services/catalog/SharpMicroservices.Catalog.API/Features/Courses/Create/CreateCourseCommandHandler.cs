@@ -37,7 +37,7 @@ public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper, IP
             await request.Picture.CopyToAsync(memoryStream, cancellationToken);
             var pictureAsByteArray = memoryStream.ToArray();
 
-            var uploadPictureCommand = new UploadCoursePictureCommand(newCourse.Id, pictureAsByteArray);
+            var uploadPictureCommand = new UploadCoursePictureCommand(newCourse.Id, pictureAsByteArray, request.Picture.FileName);
             await publishEndpoint.Publish(uploadPictureCommand, cancellationToken);
         }
 

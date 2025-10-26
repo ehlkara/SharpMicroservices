@@ -6,9 +6,10 @@ namespace SharpMicroservices.Bus;
 
 public static class MasstransitConfigurationExt
 {
-    public static IServiceCollection AddMassTransitExt(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddCommonMassTransitExt(this IServiceCollection services, IConfiguration configuration)
     {
         var busOptions = (configuration.GetSection(nameof(BusOption)).Get<BusOption>())!;
+
 
         services.AddMassTransit(configure =>
         {
@@ -19,6 +20,8 @@ public static class MasstransitConfigurationExt
                     host.Username(busOptions.UserName);
                     host.Password(busOptions.Password);
                 });
+
+                cfg.ConfigureEndpoints(context);
             });
         });
 

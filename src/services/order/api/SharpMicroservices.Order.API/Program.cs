@@ -29,7 +29,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddVersioningExt();
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
-builder.Services.AddMassTransitExt(builder.Configuration);
+builder.Services.AddCommonMassTransitExt(builder.Configuration);
 
 var app = builder.Build();
 app.AddOrderGroupEndpointExt(app.AddVersionSetExt());

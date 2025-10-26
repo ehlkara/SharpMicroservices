@@ -1,5 +1,4 @@
 using Microsoft.Extensions.FileProviders;
-using SharpMicroservices.Bus;
 using SharpMicroservices.File.Api;
 using SharpMicroservices.File.Api.Features.File;
 using SharpMicroservices.Shared.Extensions;

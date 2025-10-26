@@ -21,7 +21,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
-builder.Services.AddMassTransitExt(builder.Configuration);
+builder.Services.AddCommonMassTransitExt(builder.Configuration);
 
 var app = builder.Build();
 app.AddPaymentGroupEndpointExt(app.AddVersionSetExt());

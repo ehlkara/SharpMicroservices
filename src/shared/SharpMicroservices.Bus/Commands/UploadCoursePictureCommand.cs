@@ -1,3 +1,3 @@
 ﻿namespace SharpMicroservices.Bus.Commands;
 
-public record UploadCoursePictureCommand(Guid CourseId, byte[] Picture);
+public record UploadCoursePictureCommand(Guid CourseId, byte[] Picture, string FileName);
