@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using MassTransit;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SharpMicroservices.Bus.Events;
 using SharpMicroservices.Order.Application.Contracts.Repositories;
 using SharpMicroservices.Order.Application.Contracts.UnitOfWork;
 using SharpMicroservices.Order.Domain.Entities;
@@ -9,7 +11,7 @@ using System.Net;
 
 namespace SharpMicroservices.Order.Application.Features.Orders.CreateOrder;
 
-public class CreateOrderCommandHandler(IOrderRepository orderRepository, IIdentityService identityService, IUnitOfWork unitOfWork) : IRequestHandler<CreateOrderCommand, ServiceResult>
+public class CreateOrderCommandHandler(IOrderRepository orderRepository, IIdentityService identityService, IUnitOfWork unitOfWork, IPublishEndpoint publishEndpoint) : IRequestHandler<CreateOrderCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
@@ -47,6 +49,8 @@ public class CreateOrderCommandHandler(IOrderRepository orderRepository, IIdenti
         order.MarkAsPaid(paymentId);
         orderRepository.Update(order);
         await unitOfWork.CommitAsync(cancellationToken);
+
+        await publishEndpoint.Publish(new OrderCreatedEvent(order.Id, identityService.UserId), cancellationToken);
 
         return ServiceResult.SuccessAsNoContent();
     }
