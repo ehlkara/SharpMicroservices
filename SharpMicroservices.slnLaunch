@@ -1,0 +1,35 @@
+[
+  {
+    "Name": "all-microservice",
+    "Projects": [
+      {
+        "Path": "src\\services\\catalog\\SharpMicroservices.Catalog.API\\SharpMicroservices.Catalog.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\services\\discount\\SharpMicroservices.Discount.Api\\SharpMicroservices.Discount.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\services\\basket\\SharpMicroservices.Basket.API\\SharpMicroservices.Basket.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\services\\file\\SharpMicroservices.File.Api\\SharpMicroservices.File.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\services\\order\\api\\SharpMicroservices.Order.API\\SharpMicroservices.Order.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\services\\payment\\SharpMicroservices.Payment.API\\SharpMicroservices.Payment.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\services\\gateway\\SharpMicroservices.Gateway\\SharpMicroservices.Gateway.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
