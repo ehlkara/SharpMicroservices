@@ -25,8 +25,6 @@ public static class AuthenticationExt
                 ValidateIssuerSigningKey = true,
                 ValidateLifetime = true,
                 ValidateAudience = true,
-                RoleClaimType = "roles",
-                NameClaimType = "preferred_username"
             };
         }).AddJwtBearer("ClientCredentialSchema", options =>
         {
