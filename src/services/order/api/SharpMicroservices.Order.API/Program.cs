@@ -1,13 +1,17 @@
 using Microsoft.EntityFrameworkCore;
+using Refit;
 using SharpMicroservices.Bus;
 using SharpMicroservices.Order.API.Endpoints.Orders;
 using SharpMicroservices.Order.Application;
+using SharpMicroservices.Order.Application.Contracts.Refit;
+using SharpMicroservices.Order.Application.Contracts.Refit.PaymentService;
 using SharpMicroservices.Order.Application.Contracts.Repositories;
 using SharpMicroservices.Order.Application.Contracts.UnitOfWork;
 using SharpMicroservices.Order.Persistence;
 using SharpMicroservices.Order.Persistence.Repositories;
 using SharpMicroservices.Order.Persistence.UnitOfWork;
 using SharpMicroservices.Shared.Extensions;
+using SharpMicroservices.Shared.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +34,7 @@ builder.Services.AddVersioningExt();
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 builder.Services.AddCommonMassTransitExt(builder.Configuration);
+builder.Services.AddRefitConfigurationExt(builder.Configuration);
 
 var app = builder.Build();
 app.AddOrderGroupEndpointExt(app.AddVersionSetExt());
