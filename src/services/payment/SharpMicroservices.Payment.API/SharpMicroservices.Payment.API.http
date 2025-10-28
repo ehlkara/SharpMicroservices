@@ -21,6 +21,6 @@ Accept: application/json
 Authorization: Bearer {{passwordToken}}
 
 ### Get Payment Status
-GET {{baseAddress}}/api/v1/payments/status/3a21c5e0-a8bc-4c50-bf71-6fbe777004ca
+GET {{baseAddress}}/api/v1/payments/status/5246428802
 Accept: application/json
 Authorization: Bearer {{clientCredentialtoken}}

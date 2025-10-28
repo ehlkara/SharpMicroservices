@@ -12,6 +12,7 @@ public static class RefitConfiguration
     public static IServiceCollection AddRefitConfigurationExt(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<AuthenticatedHttpClientHandler>();
+        services.AddScoped<ClientAuthenticatedHttpClientHandler>();
 
         services.AddOptions<IdentityOption>().BindConfiguration(nameof(IdentityOption)).ValidateDataAnnotations().ValidateOnStart();
 
@@ -26,7 +27,9 @@ public static class RefitConfiguration
             var addressUrlOption = configuration.GetSection(nameof(AddressUrlOption)).Get<AddressUrlOption>();
 
             configure.BaseAddress = new Uri(addressUrlOption!.PaymentUrl);
-        }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>();
+        }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
+            .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
+
 
         return services;
     }
