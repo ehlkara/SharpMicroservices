@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SharpMicroservices.Bus.Events;
+using SharpMicroservices.Order.Application.Contracts.Refit.PaymentService;
 using SharpMicroservices.Order.Application.Contracts.Repositories;
 using SharpMicroservices.Order.Application.Contracts.UnitOfWork;
 using SharpMicroservices.Order.Domain.Entities;
@@ -11,7 +12,7 @@ using System.Net;
 
 namespace SharpMicroservices.Order.Application.Features.Orders.CreateOrder;
 
-public class CreateOrderCommandHandler(IOrderRepository orderRepository, IIdentityService identityService, IUnitOfWork unitOfWork, IPublishEndpoint publishEndpoint) : IRequestHandler<CreateOrderCommand, ServiceResult>
+public class CreateOrderCommandHandler(IOrderRepository orderRepository, IIdentityService identityService, IUnitOfWork unitOfWork, IPublishEndpoint publishEndpoint, IPaymentService paymentService) : IRequestHandler<CreateOrderCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
@@ -42,11 +43,14 @@ public class CreateOrderCommandHandler(IOrderRepository orderRepository, IIdenti
         orderRepository.Add(order);
         await unitOfWork.CommitAsync(cancellationToken);
 
-        var paymentId = Guid.Empty;
+        CreatePaymentRequest paymentRequest = new CreatePaymentRequest(order.Code, request.Payment.CardNumber, request.Payment.CardHolderName, request.Payment.Expiration, request.Payment.Cvc, order.TotalPrice);
 
-        // Payment process would be here...
+        var paymentResponse = await paymentService.CreateAsync(paymentRequest);
 
-        order.MarkAsPaid(paymentId);
+        if (!paymentResponse.Status)
+            return ServiceResult.Error(paymentResponse.ErrorMessage!, HttpStatusCode.InternalServerError);
+
+        order.MarkAsPaid(paymentResponse.PaymentId);
         orderRepository.Update(order);
         await unitOfWork.CommitAsync(cancellationToken);
 
