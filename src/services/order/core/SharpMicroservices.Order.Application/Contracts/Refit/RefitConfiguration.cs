@@ -10,12 +10,14 @@ public static class RefitConfiguration
 {
     public static IServiceCollection AddRefitConfigurationExt(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddScoped<AuthenticatedHttpClientHandler>();
+
         services.AddRefitClient<IPaymentService>().ConfigureHttpClient(configure =>
         {
             var addressUrlOption = configuration.GetSection(nameof(AddressUrlOption)).Get<AddressUrlOption>();
 
             configure.BaseAddress = new Uri(addressUrlOption!.PaymentUrl);
-        });
+        }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>();
 
         return services;
     }
